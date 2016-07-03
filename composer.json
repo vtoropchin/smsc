@@ -1,0 +1,19 @@
+{
+    "name": "coder-studio/smsc",
+    "description": "Laravel 5 API smsc.ru",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Toropchin",
+            "email": "toropchin_vv@mail.ru"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "dev",
+
+    "autoload": {
+        "psr-4": {
+            "CoderStudio\\Smsc\\": "src/"
+        }
+    }
+}
