@@ -3,11 +3,13 @@
 namespace CoderStudio\Smsc;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Smsc extends Model
 {
     public function sendSMS($phone, $sender, $text)
     {
+        $phones = explode(',', preg_replace('/[^0-9,]/', null, $phone));
         $json = file_get_contents('http://smsc.ru/sys/send.php', false, stream_context_create(array(
             'http' => array(
                 'method'  => 'POST',
@@ -16,7 +18,7 @@ class Smsc extends Model
                     [
                         'login' => urlencode(config('smsc.login')),
                         'psw' => urlencode(config('smsc.password')),
-                        'phones' => urlencode(preg_replace('/[^0-9]/', null, $phone)),
+                        'phones' => urlencode(implode(', ', $phones)),
                         'mes' => $text,
                         'charset' => 'utf-8',
                         'fmt' => 3,
