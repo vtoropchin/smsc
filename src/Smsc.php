@@ -3,7 +3,6 @@
 namespace CoderStudio\Smsc;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 class Smsc extends Model
 {
@@ -18,7 +17,7 @@ class Smsc extends Model
                     [
                         'login' => urlencode(config('smsc.login')),
                         'psw' => urlencode(config('smsc.password')),
-                        'phones' => urlencode(implode(', ', $phones)),
+                        'phones' => implode(',', $phones),
                         'mes' => $text,
                         'charset' => 'utf-8',
                         'fmt' => 3,
@@ -30,6 +29,7 @@ class Smsc extends Model
         )));
 
         $jsonDecode = json_decode($json);
+        dump($jsonDecode);
         if (isset($jsonDecode->cnt) and $jsonDecode->cnt > 0)
         {
             return true;
