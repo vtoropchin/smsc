@@ -29,7 +29,6 @@ class Smsc extends Model
         )));
 
         $jsonDecode = json_decode($json);
-        dump($jsonDecode);
         if (isset($jsonDecode->cnt) and $jsonDecode->cnt > 0)
         {
             return true;
